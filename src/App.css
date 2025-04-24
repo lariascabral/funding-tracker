@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .logo {
@@ -35,8 +38,13 @@
 
 .card {
   padding: 2em;
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 1rem 0;
 }
 
 .read-the-docs {
   color: #888;
+  font-size: 0.9em;
 }

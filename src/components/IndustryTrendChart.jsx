@@ -7,7 +7,10 @@ import { Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend)
 
 function IndustryTrendChart({ fundingData }) {
-  // Task 3: Group funding data by industry and year
+  if (!fundingData || fundingData.length === 0) {
+    return <p>No data available to display the chart.</p>
+  }
+
   const fundingByIndustry = fundingData.reduce((acc, item) => {
     if (!acc[item.industry]) {
       acc[item.industry] = {}
@@ -19,7 +22,6 @@ function IndustryTrendChart({ fundingData }) {
   const industries = Object.keys(fundingByIndustry)
   const years = [...new Set(fundingData.map((item) => item.year))].sort()
 
-  // Prepare datasets for the line chart
   const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
   const datasets = industries.map((industry, index) => ({
     label: industry,
@@ -33,7 +35,30 @@ function IndustryTrendChart({ fundingData }) {
     datasets,
   }
 
-  return <Line data={data} />
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: {
+            size: 14,
+          },
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `$${context.raw.toLocaleString()}`,
+        },
+      },
+    },
+  }
+
+  return (
+    <div className="chart-container">
+      <Line data={data} options={options} />
+    </div>
+  )
 }
 
 export default IndustryTrendChart

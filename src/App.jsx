@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import FundingBarChart from './components/FundingBarChart'
 import IndustryTrendChart from './components/IndustryTrendChart'
 import './App.css'
+import './index.css'
 
 function App() {
   // Task 1: State to store funding data
