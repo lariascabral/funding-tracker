@@ -1,34 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// This code was implemented with GitHub Copilot based on the student's prompts.
+
+import { useState, useEffect } from 'react'
+import FundingBarChart from './components/FundingBarChart'
+import IndustryTrendChart from './components/IndustryTrendChart'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Task 1: State to store funding data
+  const [fundingData, setFundingData] = useState([])
+
+  // Task 1: Fetch funding.json and store the data in fundingData
+  useEffect(() => {
+    fetch('/funding.json')
+      .then((response) => response.json())
+      .then((data) => setFundingData(data))
+      .catch((error) => console.error('Error fetching funding data:', error))
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div>
+      <h1>Funding Tracker</h1>
+      <p>
+        Visualizing startup funding data over time and by industry.
       </p>
-    </>
+
+      {/* Task 2: Render the bar chart for total funding by year */}
+      <h2>Total Funding by Year</h2>
+      <FundingBarChart fundingData={fundingData} />
+
+      {/* Task 3: Render the line chart for funding trends by industry */}
+      <h2>Funding Trends by Industry</h2>
+      <IndustryTrendChart fundingData={fundingData} />
+    </div>
   )
 }
 
